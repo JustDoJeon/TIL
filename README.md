@@ -3,15 +3,14 @@ Today I Learned
 
 ----------------------------------------------------------------------------------
 
-## java
+## JAVA
 ● 
 
-## spring
+## SPRING
 ● 
-## Database
+## DATABASE
 ● 
-## Servlet-JSP
+## SERVLET-JSP
 ● 
 ## ETC
-● 
 ● 
