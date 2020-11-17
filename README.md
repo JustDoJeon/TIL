@@ -10,7 +10,7 @@
 ● Call by reference VS Call by value
 
 ## SPRING
-● 
+● MyBatis와 스프링 연동
 ## DATABASE
 ● 
 ## SERVLET-JSP
