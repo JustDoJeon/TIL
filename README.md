@@ -8,7 +8,7 @@
 
 ## JAVA
 ● Call by reference VS Call by value
-● [자바 용어 간단정리편]https://github.com/JeonDoHyun/TIL/blob/main/JAVA/JAVA%20%EC%9A%A9%EC%96%B4%20%EB%B0%8F%20%EA%B0%9C%EB%85%90%20%EA%B0%84%EB%8B%A8%EC%A0%95%EB%A6%AC.md
+● [자바 용어 간단정리편](https://github.com/JeonDoHyun/TIL/blob/main/JAVA/JAVA%20%EC%9A%A9%EC%96%B4%20%EB%B0%8F%20%EA%B0%9C%EB%85%90%20%EA%B0%84%EB%8B%A8%EC%A0%95%EB%A6%AC.md)
 ## SPRING
 ● [SPRING 기본개념](https://github.com/JeonDoHyun/TIL/blob/main/Spring/SPRING%20%EA%B0%9C%EB%85%90%EC%A0%95%EB%A6%AC.md)<br>
 ● MyBatis와 스프링 연동
