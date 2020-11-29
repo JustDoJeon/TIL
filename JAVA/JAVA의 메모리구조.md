@@ -1,3 +1,17 @@
+
+
+# [JAVA] 자바의 메모리 구조 
+
+하나의 JAVA 파일은 크게 필드, 생성자, 메소드로 구성된다.<br>
+
+● 자바(JVM)의 메모리 사용방식 <BR>
+
+● static 메모리  <BR>
+
+● stack 메모리 <BR>
+
+● heap 메모리 <BR>
+
 ------
 
 ## JVM의 메모리 사용방식
@@ -24,7 +38,7 @@
 
 **해당 메소드가 호출될 때 메모리에 할당되고 종료되면 메모리가 해제 된다.**
 
-![image-20201129172839121](C:\Users\DoHyun\AppData\Roaming\Typora\typora-user-images\image-20201129172839121.png)
+![image-20201129175018381](C:\Users\DoHyun\Desktop\스크린샷샤샷\캡처2.JPG)
 
 ![img](http://postfiles1.naver.net/MjAxNzAzMTBfMjYy/MDAxNDg5MDcyMTUyOTM4.cRNCdoeIEEOG2ml0qNbOy9uCUm0Z7-vKvmQMPzYm6uQg.NQJdJCKtm9E-4R1vKQz2nUhMeUs92rw25YFJdeSwzSAg.PNG.heartflow89/image.png?type=w773)
 
@@ -46,7 +60,7 @@
 
 이렇게 리턴 받은 참조값을 갖고있는 객체를 통해서만 해당 인스턴드를 핸들링 할수 있다.
 
-![image-20201129174129239](C:\Users\DoHyun\AppData\Roaming\Typora\typora-user-images\image-20201129174129239.png)
+![](C:\Users\DoHyun\Desktop\스크린샷샤샷\캡처.JPG)
 
 
 
