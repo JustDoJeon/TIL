@@ -22,7 +22,7 @@
 
 메모리는 크게 4가지 영역으로 나눌수 있다. <br>
 
-자세한 내용은 GC 에 대한 내용을 다룰때 [여기]()에서 정리 하겠다. <BR>
+자세한 내용은 GC 에 대한 내용을 다룰때 [여기](https://github.com/JeonDoHyun/TIL/blob/main/JAVA/%EA%B0%80%EB%B9%84%EC%A7%80%EC%BB%AC%EB%A0%89%EC%85%98(GC).md)에서 정리 하겠다. <BR>
 
 ## Static memory area
 
@@ -74,7 +74,7 @@
 
 **이러한 기능을 가비지컬렉션(GC, 쓰레기 수집) 이라고 한다. **
 
-가비지컬렉션에 대한 내용은 [여기]() 정리 
+가비지컬렉션에 대한 내용은 [여기](https://github.com/JeonDoHyun/TIL/blob/main/JAVA/%EA%B0%80%EB%B9%84%EC%A7%80%EC%BB%AC%EB%A0%89%EC%85%98(GC).md) 정리 
 
 
 
