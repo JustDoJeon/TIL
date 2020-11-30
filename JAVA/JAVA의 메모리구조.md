@@ -37,9 +37,8 @@
 **현재까지 작성하던 메소드 내에서 정의하는 기본 자료형 (int, double, byte, long, boolean)에 해당되는 지역변수의 데이터의 값이 저장되는 공간이 Stack 영역이다.<br>**
 
 **해당 메소드가 호출될 때 메모리에 할당되고 종료되면 메모리가 해제 된다.**
-
-![image-20201129175018381](C:\Users\DoHyun\Desktop\스크린샷샤샷\캡처2.JPG)
-
+![캡처2](https://user-images.githubusercontent.com/52389219/100566890-89d41800-330a-11eb-8b07-3f9848d29976.JPG)
+<br>
 ![img](http://postfiles1.naver.net/MjAxNzAzMTBfMjYy/MDAxNDg5MDcyMTUyOTM4.cRNCdoeIEEOG2ml0qNbOy9uCUm0Z7-vKvmQMPzYm6uQg.NQJdJCKtm9E-4R1vKQz2nUhMeUs92rw25YFJdeSwzSAg.PNG.heartflow89/image.png?type=w773)
 
 위의 소스 코드처럼 a라는 변수는 main 메소드가 호출될 때 Stack 영역에 할당되고 종료시 해제된다.<br>
