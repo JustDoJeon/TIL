@@ -19,7 +19,7 @@
   
 ## DATABASE
 ● 
-## SERVLET-JSP
+## WEB 
 ● 
 ## ETC
 ● 금융 IT 지식
