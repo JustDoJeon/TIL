@@ -1,59 +1,39 @@
 ------
 
-# String 생성 방식의 차이점 new VS " " (리터럴)
-
-● new VS " "  <BR>
-
-● String 은 변하지 않는다. <BR>
-
-● String 객체들의 연산이 이루어지면, 새로운 객체를 계속 만들어내기 때문에 메모리 관리 측면에서 상당히 비효율적이다.<br>
+# 스프링 MVC
 
 ------
 
-## ***\*💡\** 아래의 코드에서 몇개의 객체가 생성이 될까?**
+## ***\*💡\** 스프링 MVC의 기본사상 **
 
-```java
-public class StringExample { 
-  public static void main(String [] args) {
-    String name1 = new String("nroo");
-    String name2 = "nroo";
-    String name3 = "nroo";
-  } 
-}
-```
+![image](https://user-images.githubusercontent.com/52389219/101736749-3bdbc300-3b07-11eb-9c85-c8f42ed46edb.png)
+<BR>
+● SERVLET/JSP에서는 HttpServletRequest/HttpServletResponse라는 타입의 객체를 이용해서 브라우저에서 전송한 정보를 처리하는 방식입니다.<br>
+● 스프링 mvc의 경우 위의 사진처럼 하나의 계층을 더한 형태가 됩니다.  <br>
+● 스프링 MVC를 이용하게 되면 개발자들은 직접적으로 HttpServletRequest/HttpServletResponse 등과 같이 서블릿/JSP의 API를 사용할 필요성이 현저하게 줄어듭니다. <br>
+● 스프링 MVC는 내부적으로 SERVLET/JSP 처리를 하니깐 중간에 연결역할을 함으로써 이러한 코드를 작성하지 않고도 원하는 기능을 구현할 수 있게됩니다. <br>
 
-● String은 클래스니깐 참조타입이고 그러면 객체 3개 만들어져서 각각 참조하겠네 라는 생각이 가능하다<br>
+<h5> Model,view and controller </h5>
+● model : 데이터를 처리하는 부분을 의미합니다.<br>
+● view : 화면을 담당하는 부분입니다.<br>
+● Controller : 요청을 처리하는 부분으로 뷰와 모델사이의 통신 역할을 합니다. <br>
 
-● 결론부터 말하자면 2개의 객체가 만들어진다. 밑의 내용을 보면 이해가 될듯 
+<h5> 스프링 MVC의 Controller </h5>
+● HttpServletRequest/HttpServletResponse를 거의 사용할 필요없이 필요한 기능 구현 <br>
+● 다양한 타입의 파라미터 처리, 다양한 타입의 리턴 타입 사용이 가능합니다. <br>
+● GET 방식, POST 방식 등 전송방식에 대한 처리를 어노테이션으로 처리 가능합니다. <br>
+● 상속/인터페이스 방식 대신에 어노테이션만으로도 필요한 설정이 가능합니다.<br>
 
-● 하지만 Java에서 String은 특별한 참조 자료형이다.<br>
+<h6> @Controller 와 @RequestMapping </h6>
+● @Controller는 자동으로 스프링의 객체(Bean) 으로 등록되는데 servlet-context.xml에서 스캔하는 코드때문에 그 스캔과정을 통해 자동등록된다. <br>
+● @RequestMapping은 현재 클래스의 모든 메서드들의 기본적인 URL경로가 됩니다. <br>
+● @RequestMappong은 속성을 추가할 수 있습니다. 가장 많이 사용하는 속성이 method 속성입니다. Method 속성은 흔히 GET방식, POST 방식을 구분해서 사용할 때 이용합니다. <br>
+● @Controller 를 작성 할 때 가장 편리한 기능은 파라미터가 자동으로 수립되는 기능입니다. request.getParameter()를 이용하는 불편함을 없앨수있습니다. <br>
 
-![img](https://t1.daumcdn.net/cfile/tistory/2536E64F58B9640E06)
-
-● 결론적으로 두 가지 방식 모두 String 객체를 생성한다는 사실은 같다. <br>
-
-● new 생성자를 이용해서 인스턴스를 생성한 뒤, heap에서 메모리 관리가 이루어진다는 사실은 다른 참조형과 같다.  <br>
-
-<h4>●  하지만 다른 참조형과는 다르게 변하지 않는다는 특징을 갖고있다.<br></h4>
-
-● 위 그림에서 s3  = s3+ s3; 을 실행한다면 CatCat값을 가지는 String 객체를 생성하고 s3는 생성된 인스턴스를 참조하게 된다.<br>
-
-<h5>● 새로운 객체를 계속 만들어 내기 때문에 메모리 관리 측면에서 상당히 비효율적이다.</br></h5>
-
-```
-● 이러한 이유로 만들어진 메모리 영역이 Heap 안에 있는 String Constant Pool이다. 
-● 여기에는 기존에 만들어진 문자열 값이 저장되어 있다.
-● s1과 s2 처럼 리터럴로 생성된 같은 값을 가지는 객체는 같은 레퍼런스를 가지게된다....!!!
-```
-
-● String은 클래스니깐 참조타입이고 그러면 객체 
-
-
-
-<br>
+자세한 내용은 dispatcherServlet 게시글에서 정리.
 
 # Referece
 
-● https://ict-nroo.tistory.com/18
+● 코드로 배우는 스프링 웹 프로젝트 - 구멍가게코딩단
 
-● http://www.journaldev.com/797/what-is-java-string-pool
+● https://min-it.tistory.com/7
