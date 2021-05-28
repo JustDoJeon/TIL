@@ -1,126 +1,337 @@
 ------
 
-# HTTP 정리
+# XML PARSER 비교 분석
 
-● HTTP란 무엇인가?  <BR>
+●  XML 파서의 종류   <BR>
 
-● http/1.0 & http/1.1 & http/2.0 정리  <BR>
+● DOM <BR>
 
-● http  vs https <br>
+● SAX <br>
+
+● STAX <br>
+
+● JAXB 
+
 
 ------
 
-## ***\*💡\** HTTP란 무엇인가요?
+## ***\*💡\** XML이란 무엇인가요?
 
-● HTTP란 HyperText Transport Protocol의 약자로 웹서버와 클라이언트간의 문서를 교환하기 위한 통신규약이다. <br>
+●  XML은 HTML과 매우 비슷한 문자 기반의 마크업 언어(text-based markup language)입니다.
+이 언어는 사람과 기계가 동시에 읽기 편한 구조로 되어 있습니다. <br>
 
-●  WWW의 분산되어 있는 Server와 Client 간에 Hypertext를 이용한 정보교환이 가능하도록 하는 통신 규약이다.<br>
+● XML은 HTML처럼 데이터를 보여주는 목적이 아닌, 데이터를 저장하고 전달할 목적으로만 만들어졌습니다.<br>
 
-●  HTTP는 웹에서만 사용하는 Protocol로 TCP/IP 기반으로 한 지점에서 다른 지점(보통 클라이언트와 서버)으로 요청과 응답을 전송한다.<br>
-
-- HTTP Message 종류
-  - Request : 요청 Message ( Client → Server )
-  - Response : 응답 Message ( Server → Client )
+●  XML 태그는 HTML 태그처럼 미리 정의되어 있지 않고, 사용자가 직접 정의할 수 있습니다. <br>
 
 
+<h5> XML의 특징 </h5>
 
-![img](http://wiki.gurubee.net/download/attachments/26739929/3_HTTPRequestResponse.jpg)
+1. XML은 다른 목적의 마크업 언어를 만드는 데 사용되는 다목적 마크업 언어입니다.<br>
 
-<h5> HTTP의 특징 </h5>
+2. 다양한 종류의 데이터를 손쉽게 교환할 수 있도록 해줍니다.  <br>
 
-● HTTP 메세지는 HTTP Server와 HTTP Client에 의해서 해석  <br>
+3. XML은 새로운 태그를 만들어 추가해도 계속해서 동작하므로, 확장성이 좋습니다.  <br>
 
-● TCP/IP 프로토콜의 Application 계층에 위치  <br>
-
-● TCP Protocol을 이용한다. (디폴트 포트 : 80 )  <br>
-
-● 현재 Version 1.1  (RFC 2616) <br>
+4.  데이터를 보여주지 않고,  데이터를 전달하고 저장하는 것만을 목적으로 합니다.<br>
+ 
+5. 텍스트 데이터 형식의 언어로 모든  XML 문서는 유니코드 문자로만 이루어집니다.<br>
 
 ```
-RPC란 무엇인가?<br>
-- Remote Procedure Call, 분산 네트워크 시스템에서 다른 서버에 있는 프로그램의 코드를 사용해서 값을 받아옴.
+참고) XML 표준사이트 <br>
+-https://www.w3.org/TR/xml/
 ```
 
 ------
 
-## ***\*💡\** HTTP/1.0 , HTTP/1.1 , HTTP/2.0
+## ***\*💡\**XML PARSER  
 
-<h5> HTTP/1.0 - 확장성 만들기</h5>
+<h5> 1) DOM Parser</h5>
 
-- HTTP/0.9 는 매우 제헌적이었고 브라우저와 서버 모두 좀 더 융통성을 가지도록 빠르게 확장되었다.
+  ● 처음 xml 문서를 메모리에 모두 로드한 후 값을 읽는다. <br>
 
-  ● 버전 정보가 각 요청 사이트내로 전송되기 시작했습니다.  (HTTP/1.0이 GET 라인에 붙은 형태로 )<br>
+  ● xml문서가 메모리에 모두 로드되어있기 때문에 노드의 검색, 수정,  구조변경등이 빠르고 용이하다. <br>
 
-  ● 상태 코드 라인 또한 응답의 시작 부분에 붙어 전송되어, 브라우저가 요청에 대한 성공과 실패를 알 수 있고 그 결과에 대한 동작을 할 수 있게되었다. <br>
+  ● 직관적이고 SAX보다 파싱하기 단순하다.<BR>
+  
+ ```
+ ● DomParser 접근방법
+ 
+File file = new File("test.xml");
 
-  ● HTTP 헤더 개념은 요청과 응답 모두를 위해 도입되어, 메타데이터 전송을 허용하고 프로토콜을 극도로 유연하고 확장 가능하도록 만들어줬다.<BR>
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-  ● 새로운 HTTP 헤더의 도움으로, 평이한 HTML 파일들 외에 다른 문서들을 전송하는 기능이 추가되었다.<BR
+DocumentBuilder db = dbf.newDocumentBuilder();
+
+Document doc = db.parse(file);
+```
+
+  
+  <H6>● DOM 파서 구현 <br></H6>
+
+
+ ```
+doc.getDocumentElement().normalize();
+
+String rootName = doc.getDocumentElement().getNodeName(); //루트 엘리먼트의 이름을 리턴 합니다.
+
+NodeList nodeLst = doc.getElementsByTagName("region_id"); //문서에서 region_id 노드를 전부 찾아 배열로 돌려줍니다.
+
+Node fstNode = nodeLst.item(0); //nodeList의 첫번째 노드를 추출 합니다.
+
+Element fstElmnt = (Element) fstNode;
+
+NodeList fstNmElmntLst = fstElmnt.getElementsByTagName("announce_date");
+
+//fstElmnt의 하위에 announce_date태그 네임을 검색하여 배열로 돌려 줍니다
+
+Element fstNmElmnt = (Element) fstNmElmntLst.item(0); ////fstNmElmntList의 첫번째 노드를 추출 합니다.
+
+NodeList fstNm = fstNmElmnt.getChildNodes(); //fstNmElmnt의 하위 노드들 추출
+
+System.out.println("URL : "+ ((Node) fstNm.item(0)).getNodeValue()); //첫번째 노드의 값 출력
+
+ 위와 같이 getElementsByTagName() 과 getNodeValue()같은 함수를 사용하여 노드를 검색하고 값을 뽑아냅니다.
+
+```
 
   
 
-  <H6>● HTTP/1.0의 문제점 <br></H6>
+<h5> 2) SAX Parser</h5>
 
-  ​	● 매번 필요할 때마다 연결( 비 지속성 연결 방식) -> 성능의 저하 <br>
+● xml 문서를 순차적으로 읽어들이면서 노드가 열리고 닫히는 과정에서 이벤트가 발생한다.<br>
 
-  ​	● GET/HEAD/POST 메소드만 허용한다. <br>
+  ● xml문서를 메모리에 전부 로딩하고 파싱하는것이 아니라서 메모리 사용량이 적고 단순히 읽기만 할 때 속도가 빠름.<br>
 
-  ​	● 한번에 얻어서 가져올수 있는 데이터의 양이 제한적이다. <br>
+  ● 발생한 이벤트를 핸들링하여 변수에 저장, 활용하는 것이기 때문에 복잡하고, 노드 수정이 어렵다.<br>
 
-  ​	● URI의 크기도 작으며, 캐시 기능이 미흡하다. <br>
+  ● Dom보다 어렵다. <br>
+  
+
+```
+● SAXParser 접근방법
+
+SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+
+File xmlFile = newFile(“test.xml”);
+
+parser.parse(xmlFile, new SAXSampleParser());
+
+```
+
+
+
+
+<h6> SAXParer 파싱 방법 </h6>
+
+```
+클래스 선언에서 DefaultHandler를 상속받아 아래 함수들을 오버라이드 하여 사용해야 한다.
+
+  // 문서의 시작시 발생하는 이벤트 입니다.
+
+  public void startDocument() throws SAXException {
+
+    super.startDocument();
+
+  }
 
   
 
-<h5> HTTP/1.1 - 표준 프로토콜</h5>
+  // 파서가 xml을 읽는 도중 엘리먼트 시작테그를 만날 때마다 발생하는 이벤트
 
-- HTTP/1.0의 성능 개선에 중점을 두었다. <br>
+  public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
-  ● 지속적인 연결을 가능하게 하는 persistent connection 지원한다. <br>
+ //qName 엘리먼트의 이름
 
-  ● http/1.0 에선 keep-alive 옵션을 줬어야했는데 이것이 default, 파이프라이닝을 추가해  여러 요청에 빠르게 응답할수 있다.<br>
+// 엘리먼트 속성
 
-  ● multiple request 처리가 가능해졌다. <br>
+    for (int i = 0; i < attributes.getLength(); i++) {
 
-  ● GET,HEAD,POST,OPTIONS,DELELTE,TRACE,CONNET 메소드를 허용한다. <br>
+      //System.out.println(“Attribute: ” + attributes.getQName(i) + “=” + attributes.getValue(i));
 
-  ● proxy server와 캐시 기능 향상 (Cashe-Control) <br>
+    }
 
-  ● request/response가 pipeline 방식으로 진행 <br>
+  }
 
-  -  파이프라인 방식
+  
 
-  ​	● 응답 메세지가 도착하지 않은 상태에서 연속적인 요구 메세지를 서버에 전달한다. <br>
+  // 엘리먼트 끝
 
-  ​	● 이때, 서버는 요구 메세지를 수신한 순서대로 응답메세지를 클라이언트에 전달한다.<br>
+  public void endElement(String uri, String localName, String qName) throws SAXException {
 
-  ​	● 연결과 종료횟수를 줄임으로서 네트워크 자원이 절약된다. <br>
+    //System.out.println(“End Element: ” + qName);
 
-  ​	● 발생하는 패킷의 숫자를 감소시키고, 네트워크 트래픽도 감소시킨다. <br>
+  }
 
-  ![img](http://wiki.gurubee.net/download/attachments/26739929/3_HTTPConnectionHandling.png)
+  
 
-<h5> HTTP/2.0 - 더 나은 성능을 위한 프로토콜</h5>
+  // 엘리먼트 이벤트 중간중간 텍스트를 만났을때 발생
 
-<h6>● HTTP/2.0의 특징 </h6>
+  public void characters(char ch[], int start, int length) throws SAXException {
 
-● Server Push - 필요한 리소스를 클라이언트 요청없이 보내준다. <br>
+    //System.out.println(“Character: ” + new String(ch, start, length));
 
-●  Multiplexed Streams - 한 커넥션에서 여러 메세지를 동시에 주고받는다.<br>
+  }
 
-●  HPACK 압축 -  헤더 중복 검사를 한다.<br>
+  
 
-●  다양한 라이브러리 및 프레임워크 연동을 지원한다.<br>
+  // 문서의 끝
 
-●  접속 로그를 Kafka에 전송해서 서버에 접근하지 않고도 확인이 가능하다.<br>
+  public void endDocument() throws SAXException {
 
-●  클라이언트 측 로드밸런싱으로 부하를 분산한다.<br>
+    super.endDocument();
+
+    System.out.println(“End Document”);
+
+  }
+
+위와 같이 SAX방식은 이벤트 발생시마다 호출 되는 함수에 제어할 구문을 구현하여 사용하여야 한다.
+```
+
+## ***\*💡\**STAX PARSER  
+
+<h5> 1) STAX Parser</h5>
+
+  ● SAX, DOM의 장점을 보완한 파서 API 모델 <br>
+
+  ● StAX는 push와 pull 방식을 동시에 제공하는 하이브리드한 형태입니다. <br>
+
+  ● JAXB보다 속도는 느리지만, 메모리 소모가 적은 경우 사용합니다.<BR>
+  
+ ```
+ ● DomParser 접근방법
+ 
+File file = new File("test.xml");
+
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+DocumentBuilder db = dbf.newDocumentBuilder();
+
+Document doc = db.parse(file);
+```
+
+  
+  <H6>● DOM 파서 구현 <br></H6>
+
+
+ ```
+//stax 파서를 사용한 코드
+public class XmlSTAXReader {
+
+	public static void main(String[] args) {
+
+		String fileName = "C:\\FileIO\\book.xml";
+
+		Long startTime = System.currentTimeMillis();
+
+		List<Book> bookList = parseXML(fileName);
+
+		Long endTime = System.currentTimeMillis();
+
+		for (Book book : bookList) {
+			System.out.println(book.toString().trim());
+		}
+		System.out.println("실행시간 : " + (endTime - startTime) + "ms");
+
+	}
+
+	private static List<Book> parseXML(String fileName) {
+		List<Book> bookList = new ArrayList<Book>();
+		boolean isWriter = true;
+		Book book = null;
+		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+		try {
+			XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(new FileInputStream(fileName));
+			while (xmlEventReader.hasNext()) {
+				XMLEvent xmlEvent = xmlEventReader.nextEvent();
+				if (xmlEvent.isStartElement()) {
+					StartElement startElement = xmlEvent.asStartElement();
+					if (startElement.getName().getLocalPart().equals("code")) {
+						book = new Book();
+						Attribute idAttr = startElement.getAttributeByName(new QName("id"));
+						if (idAttr != null) {
+							book.setId(Integer.parseInt(idAttr.getValue()));
+						}
+					} else if (startElement.getName().getLocalPart().equals("name")) {
+						xmlEvent = xmlEventReader.nextEvent();
+						if (isWriter) {
+							book.setName(xmlEvent.asCharacters().getData());
+							isWriter = false;
+						} else {
+							book.setWname(xmlEvent.asCharacters().getData());
+							isWriter = true;
+						}
+					} else if (startElement.getName().getLocalPart().equals("rank")) {
+						xmlEvent = xmlEventReader.nextEvent();
+						book.setRank(xmlEvent.asCharacters().getData());
+					} else if (startElement.getName().getLocalPart().equals("price")) {
+						Attribute idAttr = startElement.getAttributeByName(new QName("won"));
+						if (idAttr != null) {
+							book.setPrice(Integer.parseInt(idAttr.getValue()));
+						}
+					} else if (startElement.getName().getLocalPart().equals("sale")) {
+						xmlEvent = xmlEventReader.nextEvent();
+						book.setSale(xmlEvent.asCharacters().getData());
+					}
+				}
+				if (xmlEvent.isEndElement()) {
+					EndElement endElement = xmlEvent.asEndElement();
+					if (endElement.getName().getLocalPart().equals("code")) {
+						bookList.add(book);
+					}
+				}
+			}
+		} catch (FileNotFoundException | XMLStreamException e) {
+			e.printStackTrace();
+		}
+		return bookList;
+	}
+
+}
+
+```
+
+-Book.xml의 구조 -
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+    <code id="0">
+        <name>TEST0</name>
+        <writer>
+            <name>dymgaqhyuo</name>
+            <rank>j</rank>
+        </writer>
+        <price won="63000">
+            <sale>n</sale>
+        </price>
+    </code>
+    <code id="1">
+        <name>TEST1</name>
+        <writer>
+            <name>hskrohzlwj</name>
+            <rank>p</rank>
+        </writer>
+        <price won="29000">
+            <sale>y</sale>
+        </price>
+    </code>
+    <code id="2">
+        <name>TEST2</name>
+        <writer>
+        ...
+        ...
+        ...
+        ....
+        .....
+```
+
 
 
 
 # Referece
 
-● https://www.w3.org/Protocols/rfc2616/rfc2616.html
+● http://tcpschool.com/xml/xml_intro_basic
 
-● http://wiki.gurubee.net/pages/viewpage.action?pageId=26739929
+● https://developer.mozilla.org/ko/docs/Web/API/DOMParser
 
-● https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP
+● https://humble.tistory.com/23
