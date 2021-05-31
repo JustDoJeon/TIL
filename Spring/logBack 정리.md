@@ -1,105 +1,200 @@
-# About Spring 
+------
 
-● 자동으로 Connection close() 가능
-● MyBatis 내부적으로 PreparedStatement 처리
-● #{prop}와 같이 속성을 지정하면 내부적으로 자동처리
+# *About Logback**
 
-● 리턴 타입을 지정하는 경우 자동으로 객체 생성 및 ResultSet 처리
+## ***\*💡\** 자바 로깅시스템
+
+```
+각 프로그래밍 언어마다 고유의 로깅 프레임워크을 지원하지만, 특히 자바의 경우에는 그 프레임웍 수가 많고 발전된 모델이 많아서 자바 프레임워크를 살펴보고 넘어가고자 합니다.
+
+자바는 역사가 오래된 만큼 많은 로깅 프레임웍을 가지고 있습니다. log4j, logback, log4j2,apache common logging, SLF4J 등 다양한 프레임워크 들이 있는데, 그 개념과 장단점을 알아보고 사용해야합니다.
+
+```
+
+
+
+
+## ***\*💡\** Logback 알아보기
+
+
+●  기존에는 로그를 관리하기 위해 구현체로써 log4j가 사용되었습니다.<br>
+
+● 기존의 구현체 보다 안정성이 높고 편리하게 로그를 관리하기 위해 Slf4j와 그 구현체로써 Logback이 고안되었습니다.<br>
+
+●  slf4j  API를 구현하므로 다른 logging framework와 logback 간에 쉽게 전환이 가능합니다. <br>
+
+
+<h5> Logback의 사용 이유 및 장점 </h5>
+
+1.   log4j보다 약 10배 정도 빠르게 수행되도록 내부가 변경되었으며, 메모리 효율성도 좋아졌다. <br>
+
+2. 문서화가 잘 되어 있다. <br>
+
+3.  설정 파일을 변경 하였을 경우, 서버 재가동 없이 변경 내용이 자동으로 갱신된다.  <br>
+
+4. 서버 중지 없이 I/O Failure에 대한 복구를 지원한다. <br>
+
+```
+참고) XML 표준사이트 <br>
+-https://www.w3.org/TR/xml/
+```
 
 ------
 
-## 스프링 프레임워크
+## *\*💡\** Logback의 Configuration 파일  
+![Chapter 3: Configuration](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASkAAACPCAMAAACRdd33AAAAMFBMVEX///8AAADAwMCnp6fp6enQ0NBoaGjh4eGMjIxNTU2ampqysrJ8fHzHx8fZ2dnw8PBcrf+NAAAE0UlEQVR4nO2b6YKCIBCAmbK0c9//bRcRFDl0uMpgvh+6Eee3gkcOYwRBEATxdQDEJs+2aqofIPHDNDAB81C9phwDhIUMtR2VwLE5XYDjr/rIZmranE7JPTo83RVuF27iAddO7dgZ4M7EJ/4dz/EYTanE51MWbczU6OfGx9/3MKjdGbpOfHp3/LthTIQlsVdFKzXlu7L+ezz5pzFB34lV2puoqlRrel2mDObxXqF3SJny+BL1Ouo7pgzm8QJ0QsOr56uQ3N3hNU00IeYO77fYzYl6HfWZAs/HC5yFqQcMndqNi/cwH1Paij60cEzZp3n9itGeWkFVVm6KJZtaqMmUTZ67kLGK06liU+IMn+MupAlTmSqqzZTv3Jej6qpNsYxP0es3laumykzZRE9Aq2Dtpli2CdiAKTHGCJi2VUnV4J5rkaaEJFinVENeU1wVGAnVkNmUKaoiUwRxNOr++VMncZyQXsWvkNPU9EtNYocOS0ZTIB+xp3apTkxTjEx5oGMKC61T+PIgZVVrSFH9ALNBpgiCODq0TmEhU1jIFEEQR4fWKSxkCguZ+jGgKEEt4nscvU0ylVg+uHJ/g4Vn2a+Z2mrP812mLv6Yqe3m3N/m6mLiBCxrynyVZK8198KGyIPsT3zRcqacK/V+Y4gFPqLH4aeN0HYvNxi2Ku/XEU7uesNM7efVf5FCgqg1pBLXlzsVb3xfzhSmdVet6gV0bCFnJSN/g4p4PjMZ8SyO1jFMbpCRdPKXxedzipZW368KmfWmm/KVWlqWHZS7QgHaczfu0MGVN3K58LZlxPMcetm/dVP9Ei0tUtaFNgaq/zmVVRs7B8qUbFl2UO4KBWgbs94O4HWH+rqjpbUZocVEG+vp5jX6uticW6k1YyA9HZwPdrszHzfli5bWTFktZDqmEKa0AS1FSs0+vWl+VL/47gadmoRMRUuvZ1+Aqb3u4Ewts++19LNQgPZcXbde0XVTMvCZXzM8lKkpWpqnvPQVvYwpb95lRZ86WDZAG3Omvb3YHz/eIustYMq8hJQd9PZTq7WsqfeVn3G7wHqLXaPLbI4Oevup1VrWVDTh932uoAN7nYq9LUkK5/usqb1nCc7wDMuUON3n6U9I4diCqMrtnm0uP+5AFoepqM6wtHC+T5vaeuZZNuQn2VRRXD3bzIwaCqwv2rHbRFOMpQSAYQhtDtFh5ESwsiUHaH/Y1HZ7iAGjMUv+nKmtBhHjFWm4SQdGys+Z8rfoyuw+ppCNa9uNJqoG+3861RugjQRpquYAbSRYUy0FaBe9OK4KMoUl0BTE3Ra2h7pxIfZYmYKqAx8T0U3JB/vNqAobqGkquIIfJs0UHVNbuWmdQjE/tyNDBJEKzSIsZAoLmSII4ujQOoWFTGEhUwRBHB1ap7BY7/ZEvWjWAq2M8wg06jpi2GQKXaTyd1wUdoxDSOGFjF06KAFDHEPIfYXJ1Cqr/WL1etMmU0j2FOE37RxzrGVT2g/EPVNRo1rYqiN3K6bsd8xVutxYIch64SVY+4NdPgahplg7x5QPoYVmH4JJi76iixByI9N60xoB15FNXU8ZhD1Iaeoa3QCCjqmpSCP3fQYxEdttmnLds+zRqqlwGjUV8Ry9UVMsLsr1233+DmQKC5nCQqYIgiAIgvgy/2bkGUK8DmD6AAAAAElFTkSuQmCC)
+```
+logback의 configuration 파일은 매우 유연한 문법을 갖고있습니다.
+configuration 태그는 내부에 최대 1개의 root태그를 갖고,
+0개 이상의 appender와 logger태그를 가질수 있습니다.
+```  
+ <h5>  < logger > ,  로거 구성</h5>
 
-***\*💡\** 스프링 버전 정리**
+ ```
+- <logger> 는 필수 name 속성, 선택적으로  level 속성과 additivity 속성을 가집니다. 
 
-● spring 2.5 버전 - 어노테이션을 활용하는 설정을 도입하면서 편리한 설정과 개발이 가능하도록 지원 <br>
+- level 속성은 대소문자를 구분하지 않으면  TRACE, DEBUG, INFO, ERROR, ALL, OFF중 하나의 값으로 지정할 수 있습니다. 
 
-● spring 3.0 버전 - 별도의 설정 없이도 JAVA 클래스만으로 설정 파일을 대신할 수 있게 지원<br>
+- <appender-ref>태그로 포함된 appender는 명명된 로거에 추가됩니다. 
+ ```
 
-● spring 4.0 버전 - 모바일 환경과 웹 환경에서 많이 사용되는 REST 방식의 컨트롤러 지원<br>
+ <h5>  < root > ,  루트 로거 구성</h5>
+ 
+```
+- 루트 로거의 속성으로는 오직 단 하나의 level 속성만 허용됩니다.
 
-● spring 5.0 버전 - Reactor를 이용한 Reactive 스타일의 개발 환경 지원<br>
+- 가장 최상단의 로거이기 때문에 INHERITED 혹은 NULL 값은 레벨로 가질수 없습니다.
 
-
-
-***\*💡\** 스프링의 주요 특징**
-
-######  1) POJO 기반의 구성 
-
-● 객체간의 관계를 구성할 때 별도의 API 등을 사용하지 않는 구성으로 가능하도록 제작되어있다.<Br>
-
-● 일반적인 java 코드들을 이용해서 객체를 구성하는 방식을 그대로 사용할 수 있다. <br>
-
-######  2) DI를 통한 객체 간의 관계 구성 ( 의존성 주입 )
-
-● 의존성 - 하나의 객체가 다른 객체 없이 제대로 된 역할을 할 수 없다는 것을 의미한다.<br>
-
-A객체가 B객체 없이 동작이 불가능한 상황을 ' A가 B에 의존적이다 ' 라고 표현한다.<br>
-
-● 주입 - 말그대로 밀어 넣는 것을 의미<br>
-
-어떤 음식점은 매일 가게 열기전, 직접 식재료 구하기 위해 시장에 간다.<br>
-
-어떤 음식점은 식재료를 본사에서 공급받는다. <br>
-
-이 두가지 방식의 차이는 필요한 객체를 얻기 위해서 주체가 능동적인지 수동적인지에 대한 문제<br>
-
-● 의존성 주입 : '어떤 객체가 필요한 객체를 외부에서 밀어 넣는다.'<br>
-
-●  ApplicationContext 라는 존재가 필요한 객체들을 생성하고, 필요한 객체들을 주입하는 역할을 하는 구조입니다.<br>
-
-######  3) AOP 지원
-
-● 반복적인 코드의 제거<br>
-
-●  스프링프레임워크를 이용한 개발에도 반복적인 코드를 줄이고, 핵심 비즈니스 로직에만 집중할 수 있는 방법을 제공<br>
-
-● 스프링은 AOP를 AspectJ의 문법을 통해서 작성가능하다.<br>
-
-​		1) 핵심비즈니스 로직에 집중해서 코드를 개발할 수 있게 해줌.<br>
-
-​		2) 각 프로젝트 마다 다른 관심사를 적용할 때 코드의 수정을 최소화시킬 수 있다.<br>
-
-​		3) 원하는 관심사의 유지보수가 수월한 코드를 구성할 수 있다. <br>
-
-######  4) 트랜잭션의 지원
-
-● 데이터베이스를 이용할 때 하나의 업무가 여러작업으로 이루어지는 경우의 트랜잭션 처리의 어려움<br>
-
-●  스프링은 그때마다 코드를 이용해서 처리하는 작업대신 어노테이션이나 xml로 설정 할 수 있다.<br>
-
-<br>
-
-***\*💡\** XML을 이용하는 의존성 주입 설정**
-
-●  스프링은 클래스에서 객체를 생성하고 객체들의 의존성에 대한 처리 작업까지 내부에서 모든 것이 처리된다.<br>
-
-● 스프링에서 관리되는 객체를 흔히 '빈'이라고 하고, 이에 대한 설정은 XML과 JAVA를 이용해서 처리가능하다.<br>
-
-● 'root-context.xml'은 스프링 프레임워크에서 관리해야하는 빈을 설정하는 파일<br>
-
-● NameSpaces를 통해 context를 선택하고 'Bean Graph'를 통해 객체가 설정된 것을 확인할 수 있다.<br>
-
-<br>
-
-**\*💡\* 스프링이 동작하면서 생기는일 **
-
-1) 프레임워크가 시작되면 스프링이 사용하는 메모리영역(Context)를 만든다. 스프링에서는 ApplicationContext 라는 이름의 객체가 만들어진다.<br>
-
-2) 스프링에서 객체를 생성하고 관리해야하는 객체들에 대한 설정파일인 root-context에서 <context:componet-scan>을 통해 패키지를 scan하고 반영한다.<br>
-
-3) 해당 패키지에 있는 클래스들 중에서 스프링이 사용하는 @Componet 라는 어노테이션이 존재하는 클래스의 인스턴스를 생성한다. <br>
-
-4) @Autowired 라는 어노테이션이 존재하면 객체를 주입한다. <Br>
+ ```
 
 
+## *\*💡\**log4j2는 뭔가요?
 
-<br>
+![](https://blog.kakaocdn.net/dn/pz7AV/btqRL4pzCe1/A03Kx6hCy1KdzMgxHpNOf0/img.png)
+ 
+ <h6> Multi Thread 환경에서 로깅 프레임워크 성능 비교 </h6>
+  
+<h5> ● 가장 최신에 나온 프레임 워크로써 Apache log4j의 다음 버전입니다.</h5>
+
+ 
+<h5> ● logback과의 가장 큰 차이는 Multi Thread 환경에서 비동기 로거의 경우 다른 로깅 프레임워크보다 처리량이 훨씬 많고 대기 시간이 훨씬 짧습니다. </h5>
+  
+
+## ***\*💡\**logback 적용 예제
+
+<h5> logback.xml </h5>
+
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- [Layout] %m : 로그내용이 출력 %p : trace > debug > info > warn > error 등의 priority 
+	출력 %r : 어플리케이션이 시작되어 로깅이벤트가 발생하는 시점까지의 경과시간을 밀리세컨드로 출력 %c : 예) 카테고리가 a.b.c 
+	처럼 되어있다면 %c{2}는 b.c가 출력됩니다. %n : 플랫폼 종속적인 개행문자가 출력된다. \r\n 또는 \n 일것이다 %d 
+	: 로깅이벤트가 일어나 날짜 출력 ( 프로그램의 실행속도를 느리게 한다.) 예) %d{HH:mm:ss} 또는 %d{dd MMMM yyyy 
+	HH:mm:ss} %C : 호출자의 클래스명 출력 예) 클래스구조가 org.apache.xyz.SomeClass 처럼 되어있다면 %C{2}는 
+	xyz.SomeClass 가 출력됩니다 %M : 로깅이 발생한 method 이름을 나타냅니다. %F : 로깅이 발생한 프로그램 파일명을 
+	나타냅니다. %l : 로깅이 발생한 caller의 정보를 나타냅니다 %L : 로깅이 발생한 caller의 라인수를 나타냅니다 %x 
+	: 로깅이 발생한 thread와 관련된 NDC(nested diagnostic context)를 출력합니다. %X : 로깅이 발생한 
+	thread와 관련된 MDC(mapped diagnostic context)를 출력합니다. %% : % 표시를 출력하기 위해 사용한다. 
+	%t : 로그이벤트가 발생된 쓰레드의 이름을 출력합니다 -->
+
+<configuration scan="true" scanPriod="30 seconds">
+
+	<appender name="SAMPLE"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder
+			class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<Pattern>%d{HH:mm:ss.SSS} [%-5p] [%t] [%c{36}] - %m%n</Pattern>
+			</layout>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<!-- RULES for logging : TRACE < DEBUG < INFO < WARN < ERROR < FATAL -->
+	<logger name="org.springframework" level="INFO"
+		additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+	<logger name="egovframework" level="DEBUG" additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+	<logger name="java.sql" level="ERROR" additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+
+	<!-- SQL문만을 로그로 남기며, PreparedStatement일 경우 관련된 argument 값으로 대체된 SQL문이 보여진다. -->
+	<logger name="jdbc.sqlonly" level="WARN" additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+
+	<!-- SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds)를 포함한다. -->
+	<logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+
+	<!-- ResultSet을 제외한 모든 JDBC 호출 정보를 로그로 남긴다. 많은 양의 로그가 생성되므로 특별히 JDBC 문제를 
+		추적해야 할 필요가 있는 경우를 제외하고는 사용을 권장하지 않는다. -->
+	<logger name="jdbc.audit" level="ERROR" additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+
+	<!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그로 남기므로 매우 방대한 양의 로그가 생성된다. -->
+	<logger name="jdbc.resultset" level="ERROR" additivity="false">
+		<appender-ref ref="SAMPLE" />
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="SAMPLE" /> <!-- Console에 로그를 출력하고자 할 때 사용 -->
+	</root>
+</configuration>
+
+```
+
+<H6> log4j2 의 성능이 좋고 간편해 보여서 log4j2도 적용해봤습니다~</H6>
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p [%c] [%t] %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="java.sql" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="egovframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+		  <!-- log SQL with timing information, post execution -->
+	    <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    <Logger name="org.springframework" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+        <Root level="ERROR">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
+```
+
+- 로그 적용 
+![aaaaa](https://user-images.githubusercontent.com/52389219/120127323-10a27880-c1fa-11eb-859d-bb9ca2c56385.PNG)
+
+시간 /  로그레벨 / 실행 / 실행하는 패키지 위치 (몇글자로 표현할지 설정가능)  /  로그내용
+
 
 # Referece
 
-● https://server-engineer.tistory.com/253<br>
+● http://tcpschool.com/xml/xml_intro_basic
 
-● https://brinst07.github.io/ko/til/spring/spring%EA%B0%9C%EB%85%90/#5-%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%B4-%EB%8F%99%EC%9E%91%ED%95%98%EB%A9%B4%EC%84%9C-%EC%83%9D%EA%B8%B0%EB%8A%94-%EC%9D%BC <br>
+● https://developer.mozilla.org/ko/docs/Web/API/DOMParser
 
-● 코드로 배우는 스프링 웹 프로젝트 (  구멍가게 코딩단 지음 )<br>
+● https://humble.tistory.com/23
+
+● [https://bcho.tistory.com/1312?category=431297](https://bcho.tistory.com/1312?category=431297) 
