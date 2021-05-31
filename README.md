@@ -16,7 +16,8 @@
 ● [SPRING 기본개념](https://github.com/JeonDoHyun/TIL/blob/main/Spring/SPRING%20%EA%B0%9C%EB%85%90%EC%A0%95%EB%A6%AC.md)<br>
 ● [MVC 처리과정](https://github.com/JeonDoHyun/TIL/blob/main/Spring/MVC%20%EC%B2%98%EB%A6%AC%EA%B3%BC%EC%A0%95.md) <BR>
 ● [DispatcheServlet에 대하여...] <BR>
-  
+● [Interceptor 정리] <BR> 
+● [logback 정리] <BR>   
 ## DATABASE
 ● 
 ## WEB 
