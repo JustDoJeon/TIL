@@ -18,6 +18,7 @@
 ● [DispatcheServlet에 대하여...] <BR>
 ● [Interceptor 정리](https://github.com/JeonDoHyun/TIL/blob/main/Spring/%EC%9D%B8%ED%84%B0%EC%85%89%ED%84%B0%20%EC%A0%95%EB%A6%AC.md) <BR> 
 ● [logback 정리](https://github.com/JeonDoHyun/TIL/blob/main/Spring/logBack%20%EC%A0%95%EB%A6%AC.md)  <BR>   
+● [Spring AOP](https://github.com/JeonDoHyun/TIL/blob/main/Spring/logBack%20%EC%A0%95%EB%A6%AC.md)  <BR>   
 ## DATABASE
 ● 
 ## WEB 
