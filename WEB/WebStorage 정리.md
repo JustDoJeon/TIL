@@ -60,7 +60,7 @@ localStorage.clear();
 ![로컬스토리지](https://user-images.githubusercontent.com/52389219/126490778-1fc9913a-68ec-4ea9-822a-8282bce49e13.PNG) <H6>로컬 스토리지 실행과 웹 브라우저상 확인 사진<br>
 
 
-<h5> 세션 스토리지(Session Storage) </h5>
+<h5> 2) 세션 스토리지(Session Storage) </h5>
 
  ● SessionStorage는 데이터의 지속성과 액세스 범위에 특수한 제한이 존재합니다. <br>
 
