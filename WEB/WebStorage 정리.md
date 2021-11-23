@@ -60,15 +60,15 @@ localStorage.clear();
 ![로컬스토리지](https://user-images.githubusercontent.com/52389219/126490778-1fc9913a-68ec-4ea9-822a-8282bce49e13.PNG) <H6>로컬 스토리지 실행과 웹 브라우저상 확인 사진<br>
 
 
-<h5> 세션 스토리지(Session Storage) </h5>
+<h5> 2) 세션 스토리지(Session Storage) </h5>
 
-  ● <br>
+ ● SessionStorage는 데이터의 지속성과 액세스 범위에 특수한 제한이 존재합니다. <br>
 
-  ● <br>
+ ● SessionStorage는 windows 전역 객체의 sessionStorage라는 컬렉션을 통해 저장/조회가 이루어집니다.<br>
 
-  ● <br>
+ ● SessionStorage는 데이터가 지속적으로 보관되지 않습니다. 이는 마치 브라우저 기반 세션 쿠키와 그 성질이 비슷한데, 현재 페이지가 브라우징 되고 있는 브라우저 큰텍스트 내에서만 데이터가 유지됩니다. <br>
 
-  ● <br>
+ ● SessionStorage 역시 Web Storage의 기본 보안 처럼 도메인별로 별도로 생성됩니다. 여기에 더불어 SessionStorage는 같은 사이트의 같은 도메인이라 할지라도 브라우저가 다르면 서로 다른 영역이 됩니다(즉 브라우저 컨텍스트가 다릅니다) <br>
 
 
  ```
