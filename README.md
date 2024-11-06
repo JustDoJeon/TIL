@@ -22,3 +22,51 @@
 
 ● [XML Parser 정리](https://github.com/JeonDoHyun/TIL/blob/main/WEB/HTTP%20%EC%A0%95%EB%A6%AC.md)<br>
 ● [Spring Security]
+
+● 므모생 사이드프로젝트하는데 첫번째 시간걸린것,,,
+설정 파일을 서브모듈로 받아야하는데 private repo라 내 계정@github을 해야하는건 알겠는데 모듈 싱크를 맞춰야하는지 몰랐다 <br>
+
+git submodule update 시 레포지토리를 찾지 못하는 경우는 일반적으로 서브모듈의 URL에 접근 권한이 없거나, URL이 올바르지 않을 때 발생합니다. 특히 비공개 레포지토리일 경우, 인증 정보가 필요합니다. 이 문제를 해결하려면 다음 방법을 시도해 보세요.
+
+1. .gitmodules 파일 확인 및 수정
+.gitmodules 파일을 열어서 B 레포지토리의 URL이 인증 정보와 함께 정확히 입력되어 있는지 확인합니다. 예를 들어, .gitmodules 파일이 다음과 같이 되어 있어야 합니다.
+
+plaintext
+코드 복사
+[submodule "path/to/config"]
+    path = path/to/config
+    url = https://<username>:<token>@github.com/team-meumo/mms-backend-config.git
+이 후 .gitmodules 파일을 수정했으면 다음 명령어로 서브모듈 설정을 다시 로드하세요.
+
+bash
+코드 복사
+git submodule sync
+2. 인증 정보 캐시 (Git Credential Manager 사용)
+매번 인증 정보를 입력하기 번거롭다면, Git Credential Manager를 사용하여 인증 정보를 캐시할 수 있습니다. 아래 명령어를 실행하여 캐시를 설정하세요.
+
+bash
+코드 복사
+git config --global credential.helper cache
+그런 다음 git submodule update --init --recursive를 실행하면 한 번만 인증 정보를 입력하고 그 후로는 캐시된 인증 정보로 접근할 수 있습니다.
+
+3. 서브모듈 재설정
+서브모듈 URL을 수정하고 다시 추가하려면 다음을 수행합니다.
+
+기존 서브모듈을 제거합니다.
+
+bash
+코드 복사
+git submodule deinit -f -- path/to/config
+rm -rf .git/modules/path/to/config
+git rm -f path/to/config
+인증 정보가 포함된 URL로 서브모듈을 다시 추가합니다.
+
+bash
+코드 복사
+git submodule add https://<username>:<token>@github.com/team-meumo/mms-backend-config.git path/to/config
+추가 후 서브모듈을 업데이트합니다.
+
+bash
+코드 복사
+git submodule update --init --recursive
+이 방법으로도 문제가 해결되지 않는다면, 설정 중 어느 부분에서 오류가 발생하는지 추가로 확인해 볼 수 있습니다.
